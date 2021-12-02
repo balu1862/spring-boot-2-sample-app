@@ -25,7 +25,7 @@ steps:
     image_name: balu2143/spring-boot-2-sample-app
     working_directory: ./
     dockerfile: Dockerfile
-   DeployToMyCluster:
+  DeployToMyCluster:
     title: deploying to cluster
     type: deploy
     stage: deploy
