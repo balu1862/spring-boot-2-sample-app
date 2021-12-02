@@ -38,7 +38,7 @@ steps:
     candidate:
       # The image that will replace the original deployment image 
       # The image that been build using Build step
-      image: balu2143/spring-boot-2-sample-app:${{CF_BRANCH}}
+      image: balu2143/spring-boot-2-sample-app:main
       # The registry that the user's Kubernetes cluster can pull the image from
       # Codefresh will generate (if not found) secret and add it to the deployment so the Kubernetes master can pull it
-      registry: dockerhub   
+      registry: codefresh-docker-registry
