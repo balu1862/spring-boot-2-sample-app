@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-boot
-        image: balu2143/spring-boot:main
+        image: balu2143/spring-boot-2-sample-app:main
         ports:
         - containerPort: 8080
         
