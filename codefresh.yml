@@ -31,7 +31,7 @@ steps:
     stage: deploy
     kind: kubernetes  
     ## cluster name as the shown in account's integration page
-    cluster:  my-first-cluster-1
+    cluster:  gke-cluster
     # desired namespace
     namespace: default
     service: python-demo
