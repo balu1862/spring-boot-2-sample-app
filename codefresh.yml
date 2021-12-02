@@ -1,42 +1,36 @@
 version: '1.0'
 stages:
-  - prepare
-  - test
+  - clone
+  - package
   - build
   - deploy
 steps:
   main_clone:
-    title: Cloning main repository...
-    stage: prepare
+    title: Cloning spring-boot repo
+    stage: clone
     type: git-clone
-    repo: 'balu1862/spring-boot-2-sample-app'
+    repo: 'balu1862/spring-boot-test-app'
     revision: master
     git: github
-  run_unit_tests:
-    title: Compile/Unit test
-    stage: test
+  create_package:
+    title: creating the jar file
+    stage: package
     image: 'maven:3.5.2-jdk-8-alpine'
     commands:
       - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package   
-  build_app_image:
+  image_build:
     title: Building Docker Image
     type: build
     stage: build
-    image_name: balu2143/spring-boot-2-sample-app
+    image_name: balu2143/spring-boot-test-app
     working_directory: ./
     dockerfile: Dockerfile
-  DeployToMyCluster:
-    title: deploying to cluster
+  deploy_to_cluster:
+    title: Deploying in GKE
     type: deploy
     stage: deploy
     kind: kubernetes  
-    ## cluster name as the shown in account's integration page
     cluster:  gke-cluster
-    # desired namespace
     namespace: default
-      # The image that will replace the original deployment image 
-      # The image that been build using Build step
     file_path: ./deployment.yml
-      # The registry that the user's Kubernetes cluster can pull the image from
-      # Codefresh will generate (if not found) secret and add it to the deployment so the Kubernetes master can pull it
     registry: codefresh-docker-registry
