@@ -16,7 +16,7 @@ steps:
     stage: test
     image: 'maven:3.5.2-jdk-8-alpine'
     commands:
-      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository test      
+      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package   
   build_app_image:
     title: Building Docker Image
     type: build
