@@ -23,4 +23,4 @@ steps:
     stage: build
     image_name: balu2143/spring-boot-2-sample-app
     working_directory: ./
-    dockerfile: Dockerfile
+    dockerfile: Dockerfile.only-package
