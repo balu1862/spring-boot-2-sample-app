@@ -3,6 +3,7 @@ stages:
   - prepare
   - test
   - build
+  - deploy
 steps:
   main_clone:
     title: Cloning main repository...
@@ -24,3 +25,20 @@ steps:
     image_name: balu2143/spring-boot-2-sample-app
     working_directory: ./
     dockerfile: Dockerfile
+   DeployToMyCluster:
+    title: deploying to cluster
+    type: deploy
+    stage: deploy
+    kind: kubernetes  
+    ## cluster name as the shown in account's integration page
+    cluster:  my-first-cluster-1
+    # desired namespace
+    namespace: default
+    service: python-demo
+    candidate:
+      # The image that will replace the original deployment image 
+      # The image that been build using Build step
+      image: kkapelon/pythonflasksampleapp:${{CF_BRANCH}}
+      # The registry that the user's Kubernetes cluster can pull the image from
+      # Codefresh will generate (if not found) secret and add it to the deployment so the Kubernetes master can pull it
+      registry: dockerhub   
